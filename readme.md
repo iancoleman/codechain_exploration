@@ -149,6 +149,30 @@ Then push these changes for the second signer to confirm.
 Note at this partially signed stage, `codechain status` shows one line in the
 unsigned entries, and still says 'tree is dirty'
 
+## Adding a second signature
+
+The second signer can now `git pull` the changes to codechain from the first
+signer.
+
+Then the second signer calls `codechain review` which will prompt them to
+'review patch (no aborts)? y/n'
+
+Selecting y will show the patch diff.
+
+If it's a big diff the reviewer will need to press 'q' to exit the review
+and choose to sign or not sign the patch.
+
+Once reviewed the prompt is shown 'sign patch? y/n'
+
+When the patch is signed the signer can call `codechain status`
+
+But for me it isn't showing a signed release.
+
+Maybe because there was a git commit *after* the codechain signature? And now
+when I call `codechain review` it's applying the review to a later git commit?
+Are codechain reviews like full-stops, requiring all signatures before further
+code is added?
+
 ## Open questions
 
 Is there a clear and simple correlation between codechain patches and git
