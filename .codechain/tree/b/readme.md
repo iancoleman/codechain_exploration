@@ -126,29 +126,6 @@ codechain, not git - is not signed?)
 
 ## Signing code changes
 
-One of the signers can create a new release.
-
-The first thing is commit all changes to git as usual.
-
-Then run `codechain publish`
-
-A review of the changes will be shown.
-
-You may need to press 'q' to exit the preview.
-
-A y/n prompt will be shown to confirm the changes.
-
-Then an option to describe this patch (set of changes).
-
-This will create a patch, and a new codechain tree and hashchain.
-
-Commit the new codechain metadata using `git add` and `git commit`
-
-Then push these changes for the second signer to confirm.
-
-Note at this partially signed stage, `codechain status` shows one line in the
-unsigned entries, and still says 'tree is dirty'
-
 TODO
 
 * [ ] use git to make code changes, and codechain to sign them.
