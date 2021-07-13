@@ -1,3 +1,8 @@
+# Disclaimer
+
+This is an experimental document. It's a recording of my process,
+not necessarily statements of facts.
+
 # Test repo
 
 This repo is to test [codechain](https://github.com/frankbraun/codechain)
