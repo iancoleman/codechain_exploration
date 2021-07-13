@@ -69,6 +69,18 @@ The second line operation is `addkey` for adding the second key.
 
 But when we run `codechain status` our second key is not part of the chain yet.
 
+I tried to add the second key myself with `codechain sigctl -m 2` but the
+second key can only 'stage' this change, not approve it. Approval requires
+the first key.
+
+Running `codechain status` shows these unsigned actions:
+
+```
+unsigned entries:
+0 addkey 1 <second key details>
+0 sigctl 2
+```
+
 ## Using the second signer
 
 Presumably the first signer (who has all the rights to the repo) must approve
@@ -77,3 +89,42 @@ the second signer.
 At this point the second signer will commit their key (but without any signing
 rights) to the repo and git push it so the first key can receive and approve
 the new key.
+
+Ok... so as the first key now I have pulled the second key changes.
+
+It's worth checking whether any codechain stuff is pending before
+getting into any git/code changes.
+
+`codechain status`
+
+Shows there are changes waiting.
+
+The changes can be reviewed and commited using
+
+`codechain review`
+
+The changes are shown and can be approved with a y/n prompt.
+
+After approving these changes the status now shows 2-of-2 signatures required.
+
+This is interesting because the second key proposed the change, even without
+any authority to sign. Clear separation of proposal and signing.
+
+Now we have two signers in place, and both are required before a valid release
+can be created.
+
+Note though the 'tree is dirty' status is still there in codechain when we call
+
+`codechain status`
+
+because there's no signed releases yet.
+
+## Signing code changes
+
+TODO
+
+* [ ] use git to make code changes, and codechain to sign them.
+* [ ] single commit release using detached signatures and out-of-band comms
+* [ ] consider if this can be automated or aliased somehow
+* [ ] consider possible git pull combined with codechain review
+* [ ] get a third key from someone else and see what happens
