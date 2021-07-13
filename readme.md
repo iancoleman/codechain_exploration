@@ -13,9 +13,13 @@ Git is initialized:
 
 `git init`
 
+This creates a `.git` subdirectory containing all the git-related metadata.
+
 Then codechain is initialized with one signer:
 
 `codechain start -s ~/.config/codechain/secrets/<myidentity>`
+
+This creates a `.codechain` subdirectory containing all the codechain metadata.
 
 The existing code and codechain directory with one signer is commited via git.
 
@@ -23,12 +27,15 @@ We can see where git is at using `git log` and we can see where codechain is at
 using `codechain status`
 
 It's also easy to start codechain again from scratch:
+
 `rm -r .codechain`
+
 `codechain start -s ~/.config/codechain/secrets/<myidentity>`
 
-At this stage there's no point making a release with only 1 signer so we can
-push the git to a repo and start to get others involved in the git commits and
-the codechain.
+At this stage there's no point making a release with only 1 signer
+(confirm this is true?)
+so we can push the git to a repo and start to get others involved in the git
+commits and the codechain.
 
 ## Adding another signer
 
@@ -41,7 +48,7 @@ In this case the second person is my desktop (first person is my laptop).
 The desktop doesn't have codechain installed so I'll get the binary that was
 compiled on my laptop.
 
-[codechain](https://mega.nz/file/Zdc0nTQT#L454w2wxGn7QYGpST2Lh68dO1QmT7sm6MVoemn7Al1g)
+[mega.nz#codechain](https://mega.nz/file/Zdc0nTQT#L454w2wxGn7QYGpST2Lh68dO1QmT7sm6MVoemn7Al1g)
 `linux_x86_64` at commit
 [b63f139](https://github.com/frankbraun/codechain/tree/b63f13940558f136cf778965b3b7a19e9a7d42a0)
 
@@ -81,16 +88,13 @@ unsigned entries:
 0 sigctl 2
 ```
 
-## Using the second signer
+## Approving the second signer
 
 Presumably the first signer (who has all the rights to the repo) must approve
 the second signer.
 
-At this point the second signer will commit their key (but without any signing
-rights) to the repo and git push it so the first key can receive and approve
-the new key.
-
-Ok... so as the first key now I have pulled the second key changes.
+Now operating as the first key, I have pulled the second key changes using
+`git pull`
 
 It's worth checking whether any codechain stuff is pending before
 getting into any git/code changes.
@@ -105,19 +109,20 @@ The changes can be reviewed and commited using
 
 The changes are shown and can be approved with a y/n prompt.
 
+It's wise to double check the key being added really does belong to the second
+person, not exactly sure best practice here but seems like one of those
+'very important things' gpg is always hammering on about (keyparties etc).
+
 After approving these changes the status now shows 2-of-2 signatures required.
 
 This is interesting because the second key proposed the change, even without
-any authority to sign. Clear separation of proposal and signing.
+any authority to sign the change. Clear separation of proposal and signing.
 
 Now we have two signers in place, and both are required before a valid release
 can be created.
 
-Note though the 'tree is dirty' status is still there in codechain when we call
-
-`codechain status`
-
-because there's no signed releases yet.
+Note that `codechain status` still shows 'tree is dirty' (because `head` - of
+codechain, not git - is not signed?)
 
 ## Signing code changes
 
@@ -125,6 +130,6 @@ TODO
 
 * [ ] use git to make code changes, and codechain to sign them.
 * [ ] single commit release using detached signatures and out-of-band comms
-* [ ] consider if this can be automated or aliased somehow
+* [ ] consider if signing can be automated or aliased somehow
 * [ ] consider possible git pull combined with codechain review
 * [ ] get a third key from someone else and see what happens
