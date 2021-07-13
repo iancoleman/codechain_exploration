@@ -1,8 +1,3 @@
-# Disclaimer
-
-This is an experimental document. It's a recording of my process,
-not necessarily statements of facts.
-
 # Test repo
 
 This repo is to test [codechain](https://github.com/frankbraun/codechain)
@@ -131,93 +126,7 @@ codechain, not git - is not signed?)
 
 ## Signing code changes
 
-One of the signers can create a new release.
-
-The first thing is commit all changes to git as usual.
-
-Then run `codechain publish`
-
-A review of the changes will be shown.
-
-You may need to press 'q' to exit the preview.
-
-A y/n prompt will be shown to confirm the changes.
-
-Then an option to describe this patch (set of changes).
-
-This will create a patch, and a new codechain tree and hashchain.
-
-Commit the new codechain metadata using `git add` and `git commit`
-
-Then push these changes for the second signer to confirm.
-
-Note at this partially signed stage, `codechain status` shows one line in the
-unsigned entries, and still says 'tree is dirty'
-
-## Adding a second signature
-
-The second signer can now `git pull` the changes to codechain from the first
-signer.
-
-Then the second signer calls `codechain review` which will prompt them to
-'review patch (no aborts)? y/n'
-
-Selecting y will show the patch diff.
-
-If it's a big diff the reviewer will need to press 'q' to exit the review
-and choose to sign or not sign the patch.
-
-Once reviewed the prompt is shown 'sign patch? y/n'
-
-When the patch is signed the signer can call `codechain status`
-
-But for me it isn't showing a signed release.
-
-Maybe because there was a git commit *after* the codechain signature? And now
-when I call `codechain review` it's applying the review to a later git commit?
-Are codechain reviews like full-stops, requiring all signatures before further
-code is added?
-
-I'm a bit confused here.
-
-I'll `git commit` and `git push` the second signature.
-
-## Finalizing the release
-
-When I did `git pull` of the second signature back onto the laptop (where the
-first signature was generated) I followed up with `codechain review`. This
-combo of `git pull && codechain review` seems very common.
-
-After the review was made and signed `codechain status` showed a signed
-release. It still aslo says 'tree is dirty' so there's something in that
-beyond just release status I suppose.
-
-So it looks like I've managed to sign a release. A couple of surprising
-observations:
-
-* I ended up doing three signatures to make a release (laptop, then desktop,
-then laptop again). I wonder if that could have been less or if I messed it up
-somehow? I would have thought just laptop then desktop would be enough.
-
-* git commits and codechain patches are not tied to each other. I'm still
-conceptualizing the most appropriate way for these to work together. It's
-probably going to be a git feature-branch type of workflow that suits this
-best.
-
-Next step is to try to avoid having N git commits for N codechain signatures.
-
-This should be achieved by using detached signatures and non-git communication
-of those patches to a 'leader' of the patch, who can commit all the signatures
-in one single git commit.
-
-## Open questions
-
-Is there a clear and simple correlation between codechain patches and git
-commits? I think not, codechain patches are *completely* independent of the
-git history, and it's a mistake to believe that a git commit containing a
-codechain patch must include all prior commits.
-
-## TODO
+TODO
 
 * [ ] use git to make code changes, and codechain to sign them.
 * [ ] single commit release using detached signatures and out-of-band comms
