@@ -17,3 +17,16 @@ The existing code and codechain directory with one signer is commited via git.
 
 We can see where git is at using `git log` and we can see where codechain is at
 using `codechain status`
+
+It's also easy to start codechain again from scratch:
+`rm -r .codechain`
+`codechain start -s ~/.config/codechain/secrets/<myidentity>`
+
+At this stage there's no point making a release with only 1 signer so we can
+push the git to a repo and start to get others involved in the git commits and
+the codechain.
+
+## Adding another signer
+
+TODO Another person will pull this repo and add their own content to the doc
+and their codechain key.
