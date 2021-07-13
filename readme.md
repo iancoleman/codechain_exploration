@@ -149,7 +149,14 @@ Then push these changes for the second signer to confirm.
 Note at this partially signed stage, `codechain status` shows one line in the
 unsigned entries, and still says 'tree is dirty'
 
-TODO
+## Open questions
+
+Is there a clear and simple correlation between codechain patches and git
+commits? I think not, codechain patches are *completely* independent of the
+git history, and it's a mistake to believe that a git commit containing a
+codechain patch must include all prior commits.
+
+## TODO
 
 * [ ] use git to make code changes, and codechain to sign them.
 * [ ] single commit release using detached signatures and out-of-band comms
