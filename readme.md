@@ -173,6 +173,38 @@ when I call `codechain review` it's applying the review to a later git commit?
 Are codechain reviews like full-stops, requiring all signatures before further
 code is added?
 
+I'm a bit confused here.
+
+I'll `git commit` and `git push` the second signature.
+
+## Finalizing the release
+
+When I did `git pull` of the second signature back onto the laptop (where the
+first signature was generated) I followed up with `codechain review`. This
+combo of `git pull && codechain review` seems very common.
+
+After the review was made and signed `codechain status` showed a signed
+release. It still aslo says 'tree is dirty' so there's something in that
+beyond just release status I suppose.
+
+So it looks like I've managed to sign a release. A couple of surprising
+observations:
+
+* I ended up doing three signatures to make a release (laptop, then desktop,
+then laptop again). I wonder if that could have been less or if I messed it up
+somehow? I would have thought just laptop then desktop would be enough.
+
+* git commits and codechain patches are not tied to each other. I'm still
+conceptualizing the most appropriate way for these to work together. It's
+probably going to be a git feature-branch type of workflow that suits this
+best.
+
+Next step is to try to avoid having N git commits for N codechain signatures.
+
+This should be achieved by using detached signatures and non-git communication
+of those patches to a 'leader' of the patch, who can commit all the signatures
+in one single git commit.
+
 ## Open questions
 
 Is there a clear and simple correlation between codechain patches and git
